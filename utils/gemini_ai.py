@@ -2,12 +2,13 @@ import google
 import genai
 from PIL import Image
 import json
+import os
 
 # ----------------------------
 # API KEY
 # ----------------------------
 
-API_KEY = "GEMINI_API_KEY"
+API_KEY = os.getenv"GEMINI_API_KEY"
 
 client = genai.Client(api_key=API_KEY)
 
