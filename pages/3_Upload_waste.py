@@ -129,7 +129,7 @@ with st.form("upload_form"):
     user_email = st.session_state.user_email  
     weight = st.number_input(
 
-        "Estimated Weight (kg)",
+        "Estimated Weight (gms)",
 
         min_value=0.1,
 
