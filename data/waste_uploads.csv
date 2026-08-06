@@ -1,0 +1,4 @@
+WasteID,UserName,UserEmail,PlasticType,EstimatedWeight,City,Address,Image,ImageHash,AI Score,Grade,Recyclable,Cleanliness,Reuse,Environmental Impact,Status,Date
+WST001,Samiksha Bhagat,PET Bottle,1.0,siddhi,n,uploads\20260806_122331_plastic.jpeg,e4598a7b9cde4694b1918c6a69edfe7a,84,Good,Yes,Medium,Reuse as a plant pot or storage bottle.,Recycling this plastic helps reduce landfill waste.,Collected,06-08-2026 12:23
+WST002,Samiksha Bhagat,PET Bottle,1.0,n,n,uploads\20260806_152513_pp.jpeg,7093105a9b54ed01cddcb28fee570afc,84,Good,Yes,Medium,Reuse as a plant pot or storage bottle.,Recycling this plastic helps reduce landfill waste.,Pending,06-08-2026 15:25
+WST003,swarupa,PET Bottle,1.0,nagpur,hostel,uploads\20260806_164304_pp2.jpeg,ece89bb07945a8b6499a983f8531424b,84,Good,Yes,Medium,Reuse as a plant pot or storage bottle.,Recycling this plastic helps reduce landfill waste.,Pending,06-08-2026 16:43
