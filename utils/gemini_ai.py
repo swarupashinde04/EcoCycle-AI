@@ -1,4 +1,4 @@
-from google import genai
+import google import genai
 from PIL import Image
 import json
 
@@ -6,7 +6,7 @@ import json
 # API KEY
 # ----------------------------
 
-API_KEY = "AQ.Ab8RN6K0AIchbUKqHzy07at5E1A0uBWC8jmRD3EqyMP9Ej_1zg"
+API_KEY = "GEMINI_API_KEY"
 
 client = genai.Client(api_key=API_KEY)
 
