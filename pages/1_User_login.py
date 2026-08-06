@@ -66,65 +66,62 @@ if "eco_score" not in st.session_state:
 if "user_level" not in st.session_state:
     st.session_state.user_level = ""
 
-# ----------------------------
-# LOGIN FORM
-# ----------------------------
+# =====================================================
+# SHOW LOGIN FORM ONLY IF USER IS NOT LOGGED IN
+# =====================================================
 
-with st.form("login_form"):
+if not st.session_state.logged_in:
 
-    email = st.text_input("📧 Email")
+    with st.form("login_form"):
 
-    password = st.text_input(
-        "🔒 Password",
-        type="password"
-    )
+        email = st.text_input("📧 Email")
 
-    login = st.form_submit_button("🚀 Login")
+        password = st.text_input(
+            "🔒 Password",
+            type="password"
+        )
 
-# ----------------------------
-# LOGIN LOGIC
-# ----------------------------
+        login = st.form_submit_button("🚀 Login")
 
-if login:
+    if login:
 
-    match = users[
-        (users["email"].astype(str).str.strip().str.lower() == email.strip().lower()) &
-        (users["Password"].astype(str).str.strip() == password.strip())
-    ]
+        match = users[
+            (users["email"].astype(str).str.strip().str.lower() == email.strip().lower()) &
+            (users["Password"].astype(str).str.strip() == password.strip())
+        ]
 
-    if match.empty:
+        if match.empty:
 
-        st.error("❌ Invalid Email or Password.")
+            st.error("❌ Invalid Email or Password.")
 
-    else:
+        else:
 
-        user = match.iloc[0]
+            user = match.iloc[0]
 
-        st.session_state.logged_in = True
-        st.session_state.user_name = user["Name"]
-        st.session_state.user_email = user["email"]
-        st.session_state.eco_score = int(user["EcoScore"])
-        st.session_state.user_level = user["Level"]
+            st.session_state.logged_in = True
+            st.session_state.user_name = user["Name"]
+            st.session_state.user_email = user["email"]
+            st.session_state.eco_score = int(pd.to_numeric(user["EcoScore"], errors="coerce") or 0)
+            st.session_state.user_level = user["Level"]
 
-        st.success(f"🎉 Welcome {user['Name']}!")
+            st.success(f"🎉 Welcome {user['Name']}!")
+            st.info("You have logged in successfully.")
 
-        st.info("You have logged in successfully.")
+            st.rerun()
 
-# ----------------------------
-# LOGIN STATUS
-# ----------------------------
+# =====================================================
+# IF ALREADY LOGGED IN
+# =====================================================
 
-if st.session_state.logged_in:
-
-    st.divider()
+else:
 
     st.success(
         f"✅ Logged in as: {st.session_state.user_name}"
     )
 
-    st.write(f"📧 Email : {st.session_state.user_email}")
-    st.write(f"🌱 EcoScore : {st.session_state.eco_score}")
-    st.write(f"🏅 Level : {st.session_state.user_level}")
+    st.write(f"📧 **Email:** {st.session_state.user_email}")
+    st.write(f"🌱 **EcoScore:** {st.session_state.eco_score}")
+    st.write(f"🏅 **Level:** {st.session_state.user_level}")
 
     st.divider()
 
@@ -149,11 +146,24 @@ if st.session_state.logged_in:
 
             st.rerun()
 
-st.divider()
+# =====================================================
+# FORGOT PASSWORD
+# =====================================================
 
-if st.button("🔑 Forgot Password?"):
-    st.info("""
-For this prototype, please contact the administrator to reset your password.
+if not st.session_state.logged_in:
+
+    st.divider()
+
+    st.markdown("### 🔑 Forgot Password?")
+
+    if st.button("Reset Password"):
+
+        st.info("""
+This is a prototype version of GreenTick AI.
+
+For demo purposes, password reset is handled by the administrator.
 
 📧 support@greentick.ai
+
+In the production version, users will be able to reset their password securely using Email OTP verification.
 """)
