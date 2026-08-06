@@ -103,6 +103,7 @@ with st.form("register_form"):
 
 if submit:
 
+    # Empty fields
     if not all([
         name,
         email,
@@ -112,55 +113,65 @@ if submit:
         password,
         confirm
     ]):
+        st.error("⚠️ Please fill all fields.")
+        st.stop()
 
-        st.error("Please fill all fields.")
+    # Terms & Conditions
+    if not terms:
+        st.error("⚠️ You must accept the Terms & Conditions before registering.")
+        st.stop()
 
-    elif password != confirm:
+    # Password match
+    if password != confirm:
+        st.error("❌ Passwords do not match.")
+        st.stop()
 
-        st.error("Passwords do not match.")
+    # Mobile validation
+    if not (mobile.isdigit() and len(mobile) == 10):
+        st.error("📱 Enter a valid 10-digit mobile number.")
+        st.stop()
 
-    elif not terms:
+    # Email validation
+    if "@" not in email or "." not in email:
+        st.error("📧 Enter a valid email address.")
+        st.stop()
 
-        st.warning("Please accept Terms & Conditions.")
+    # Duplicate email
+    if email.strip().lower() in users["email"].astype(str).str.strip().str.lower().values:
+        st.error("⚠️ Email already registered.")
+        st.stop()
 
-    elif email.strip().lower() in users["email"].astype(str).str.strip().str.lower().values:
+    # Save User
+    new_user = pd.DataFrame([{
 
-        st.error("Email already registered.")
+        "Name": name.strip(),
 
-    else:
+        "email": email.strip().lower(),
 
-        new_user = pd.DataFrame([{
+        "Mobile": mobile.strip(),
 
-            "Name": name.strip(),
+        "City": city.strip(),
 
-            "email": email.strip().lower(),
+        "Address": address.strip(),
 
-            "Mobile": mobile.strip(),
+        "Password": password,
 
-            "City": city.strip(),
+        "EcoScore": 0,
 
-            "Address": address.strip(),
+        "Level": "Beginner"
 
-            "Password": password,
+    }])
 
-            "EcoScore": 0,
+    users = pd.concat(
+        [users, new_user],
+        ignore_index=True
+    )
 
-            "Level": "Beginner"
+    users.to_csv(
+        user_file,
+        index=False
+    )
 
-        }])
+    st.success("🎉 Registration Successful!")
 
-        users = pd.concat(
-            [users, new_user],
-            ignore_index=True
-        )
-
-        users.to_csv(
-            user_file,
-            index=False
-        )
-
-        st.success("🎉 Registration Successful!")
-
-        st.info(
-            "👉 Now login using your Email and Password."
-        )
+    st.info("👉 Now login using your Email and Password.")
