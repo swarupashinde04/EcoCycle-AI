@@ -96,7 +96,7 @@ if st.session_state.trader_logged_in:
 
         if st.button("📦 Open Trader Dashboard"):
 
-            st.switch_page("pages/6_Trader_Dashboard.py")
+            st.switch_page("pages/6_Trader_dashboard.py")
 
     with c2:
 
