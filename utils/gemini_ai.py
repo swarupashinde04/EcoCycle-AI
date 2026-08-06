@@ -1,4 +1,5 @@
-import google import genai
+import google
+import genai
 from PIL import Image
 import json
 
