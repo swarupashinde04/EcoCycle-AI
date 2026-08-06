@@ -108,7 +108,7 @@ if login:
 
         st.success(f"🎉 Welcome {user['Name']}!")
 
-        st.info("You have logged in successfully.")
+        st.info("You have logged in successfully."))
 
 # ----------------------------
 # LOGIN STATUS
@@ -148,3 +148,12 @@ if st.session_state.logged_in:
             st.success("Logged out successfully.")
 
             st.rerun()
+            
+st.divider()
+
+if st.button("🔑 Forgot Password?"):
+    st.info("""
+For this prototype, please contact the administrator to reset your password.
+
+📧 support@ecocycle.ai
+""")
