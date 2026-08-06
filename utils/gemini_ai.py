@@ -1,5 +1,4 @@
-import google
-import genai
+import google.generativeai as genai
 from PIL import Image
 import json
 import os
@@ -8,9 +7,12 @@ import os
 # API KEY
 # ----------------------------
 
-API_KEY = os.getenv"GEMINI_API_KEY"
+API_KEY = os.getenv("GEMINI_API_KEY")
 
-client = genai.Client(api_key=API_KEY)
+genai.configure(api_key=API_KEY)
+
+model = genai.GenerativeModel("gemini-2.5-flash")
+response = model.generate_content([prompt, image])
 
 # ----------------------------
 # AI ANALYSIS
