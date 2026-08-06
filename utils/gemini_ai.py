@@ -9,10 +9,12 @@ import os
 
 API_KEY = os.getenv("GEMINI_API_KEY")
 
+if not API_KEY:
+    raise ValueError("GEMINI_API_KEY not found in environment variables.")
+
 genai.configure(api_key=API_KEY)
 
 model = genai.GenerativeModel("gemini-2.5-flash")
-response = model.generate_content([prompt, image])
 
 # ----------------------------
 # AI ANALYSIS
@@ -25,9 +27,7 @@ def analyze_waste(image_path):
     prompt = """
 You are an expert in plastic waste management.
 
-Analyze the uploaded image.
-
-Return ONLY valid JSON.
+Analyze the uploaded image and return ONLY valid JSON.
 
 {
   "plastic_type": "",
@@ -39,41 +39,24 @@ Return ONLY valid JSON.
 }
 """
 
-    response = client.models.generate_content(
-        model="gemini-2.5-flash",
-        contents=[
-            prompt,
-            image
-        ]
-    )
-
-    text = response.text.strip()
-
-    text = text.replace("```json", "")
-    text = text.replace("```", "")
-    text = text.strip()
-
     try:
-        json.loads(text)
+        response = model.generate_content([prompt, image])
+
+        text = response.text.strip()
+        text = text.replace("```json", "").replace("```", "").strip()
+
+        json.loads(text)  # Validate JSON
         return text
 
     except Exception:
-
         return json.dumps({
-
             "plastic_type": "Unknown",
-
             "recyclable": "Unknown",
-
             "quality_score": 50,
-
             "cleanliness": "Medium",
-
             "reuse_suggestion": "Reuse whenever possible.",
-
             "environmental_impact": "Proper recycling helps reduce pollution."
-
         })
 
 if __name__ == "__main__":
-    print("Gemini file loaded successfully")
+    print("Gemini loaded successfully")
