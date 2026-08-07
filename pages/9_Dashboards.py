@@ -8,7 +8,7 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("📊 EcoCycle AI Dashboard")
+st.title("📊 GreenTick Dashboard")
 st.write("Overview of the complete recycling ecosystem.")
 
 st.divider()
