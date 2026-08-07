@@ -177,22 +177,22 @@ col1, col2, col3 = st.columns(3)
 
 features = [
     ("🤖 AI Waste Detection",
-     "Automatically detects plastic waste from uploaded images using Artificial Intelligence."),
+     "AI-powered plastic waste detection."),
 
     ("⭐ AI Quality Score",
-     "Analyzes cleanliness and recycling quality to help traders make better decisions."),
+     "AI evaluates waste quality for traders."),
 
     ("🚛 Smart Pickup",
-     "Optimizes pickup routes to reduce fuel consumption and collection time."),
+     "AI-optimized pickup routes."),
 
     ("🛡️ Fraud Detection",
-     "Prevents duplicate image uploads and reward abuse using image fingerprinting."),
+     "Fraud detection using image hashing."),
 
     ("♻️ Reuse Suggestions",
-     "Suggests creative ways to reuse plastic before recycling it."),
+     "Encourages sustainable plastic reuse."),
 
     ("🌱 EcoScore",
-     "Rewards users with EcoPoints for contributing to a cleaner environment.")
+     "Earn rewards for recycling.")
 ]
 
 cards = [col1, col2, col3]
