@@ -141,7 +141,7 @@ summary = pd.DataFrame({
 
     "Value":[
         latest["WasteID"],
-        f'{latest["EstimatedWeight"]} kg',
+        f'{latest["EstimatedWeight"]} gms',
         latest["City"],
         latest["Address"],
         latest["Status"],
