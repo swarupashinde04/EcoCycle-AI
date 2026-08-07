@@ -306,7 +306,7 @@ with c1:
 """)
 
 with c2:
-    st.info("🏭 Register as a Trader")
+    st.info("🏭 Login as a Trader")
     st.write("""
 - Receive pickup requests
 - View AI analysis
