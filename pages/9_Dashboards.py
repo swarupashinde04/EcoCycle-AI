@@ -106,7 +106,7 @@ with c2:
 
 with c3:
     st.metric(
-        "⚖ Plastic (kg)",
+        "⚖ Plastic (gms)",
         round(total_weight,2)
     )
 
